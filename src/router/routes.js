@@ -6,6 +6,21 @@ const routes = [{
     ssr: true
   }
 },{
+  name: 'userList',
+  path: '/user',
+  component: () => import('../views/users/list.vue'),
+  meta: {
+    ssr: true
+  }
+},{
+  name: 'userInfo',
+  hideMenu: true,
+  path: '/user/:userId',
+  component: () => import('../views/users/info.vue'),
+  meta: {
+    ssr: true
+  }
+},{
   name: 'hello',
   hideMenu: true,
   path: '/',

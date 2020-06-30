@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="menu-wrap">
-      <button class="menu" :class="{'active-menu': activeMenu == m.nam}" v-for="(m, idx) in menus" :key="idx" @click="goMenu(m)">
+      <button class="menu" :class="{'active-menu': activeMenu == m.name}" v-for="(m, idx) in menus" :key="idx" @click="goMenu(m)">
         {{m.name}}
       </button>
     </div>
@@ -56,8 +56,9 @@ body, html {
 .menu-wrap {
   width: 160px;
   flex-grow: 0;
+  flex-shrink: 0;
   height: 100%;
-  background-color: darkgrey;
+  background-color:whitesmoke;
 }
 .active-menu {
   background-color:slategrey;
@@ -66,12 +67,20 @@ body, html {
 .menu {
   width: 100%;
   border: none;
-  margin-bottom: 10px;
+  border-bottom: slategrey 1px solid;
   font-size: 16px;
   height: 40px;
   line-height: 40px;
 }
 .content-wrap {
   flex-grow: 1;
+  margin: 10px;
+}
+button {
+  margin: 0;
+  border: none;
+  padding: 0;
+  outline: none;
+  background-color: transparent;
 }
 </style>
