@@ -1,28 +1,77 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="menu-wrap">
+      <button class="menu" :class="{'active-menu': activeMenu == m.nam}" v-for="(m, idx) in menus" :key="idx" @click="goMenu(m)">
+        {{m.name}}
+      </button>
+    </div>
+    <div class="content-wrap">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import routes from './router/routes'
+const menus = routes.filter(route => !route.hideMenu && route.name).map(r => ({name: r.name}))
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data () {
+    return {
+      menus
+    }
+  },
+  computed: {
+    activeMenu () {
+      return this.$route.name
+    }
+  },
+  methods: {
+    goMenu (menu) {
+      if (!menu || menu.name === this.$route.name) { return }
+      this.$router.push({name: menu.name})
+    }
+  },
 }
 </script>
 
 <style>
+body, html {
+  margin: 0;
+  border: none;
+  padding: 0;
+  height: 100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+}
+.menu-wrap {
+  width: 160px;
+  flex-grow: 0;
+  height: 100%;
+  background-color: darkgrey;
+}
+.active-menu {
+  background-color:slategrey;
+  color: white;
+}
+.menu {
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+}
+.content-wrap {
+  flex-grow: 1;
 }
 </style>

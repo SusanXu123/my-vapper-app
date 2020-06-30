@@ -1,8 +1,13 @@
 import Vue from 'vue'
+import createRouter from './router'
 import App from './App.vue'
 
 Vue.config.productionTip = false
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+export default function createApp () {
+  return {
+    router: createRouter(),
+    head: {},
+    render: h => h(App)
+  }
+}
